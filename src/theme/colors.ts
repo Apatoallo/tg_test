@@ -4,23 +4,10 @@ export const white = '#FFFFFF';
 
 export const blue = {
   a100: '#F0F6FD',
-  a200: '#D8EAFC',
-  a300: '#A6CAED',
-  a400: '#7FB2E5',
-  a500: '#599BDE',
-  a600: '#3686D6',
-  a700: '#0066CC',
-  a800: '#0059B2',
-  a900: '#004D99',
-  a1000: '#004080',
-  a1100: '#003366',
-  a1200: '#00264D',
-  a1300: '#001A33',
 };
 
 export const red = {
-  a100: '#FFEDF0',
-  a600: '#F83E5A',
+  a100: 'rgb( 184, 58, 63 )',
 };
 
 export const yellow = {
@@ -30,8 +17,6 @@ export const yellow = {
 export const green = {
   a100: '#E3FCF4',
   a300: '#93F5D3',
-  a700: '#00CF86',
-  a800: '#00A86D',
 };
 
 export const neutral210 = {

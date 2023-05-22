@@ -5,10 +5,9 @@ import {
 } from '@react-navigation/stack';
 import {useTheme} from '../theme';
 import {RouteProp} from '@react-navigation/core';
-import LoginScreen from '../screens/Login';
+import LoginScreen from '../screens/login/Login';
 // import ProductsScreen from '../screens/Products';
 
-// import RegisterAboutScreen from '../screens/auth/registerAbout';
 
 const Stack = createStackNavigator<AuthStackParamList>();
 
@@ -27,8 +26,9 @@ const AuthNavigation = () => {
         name="Login"
         component={LoginScreen}
         options={{
-          headerBackTitleVisible: false,
-          title: '',
+          // headerBackTitleVisible: false,
+          headerShown: false,
+          // title: '',
         }}
       />
     </Stack.Navigator>
