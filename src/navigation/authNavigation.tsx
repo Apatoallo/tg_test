@@ -16,7 +16,7 @@ const AuthNavigation = () => {
   const {theme} = useTheme();
   return (
     <Stack.Navigator
-      initialRouteName="Welcome"
+      initialRouteName="Login"
       screenOptions={{
         headerTitleStyle: {
           fontFamily: theme.font.default,
@@ -31,25 +31,12 @@ const AuthNavigation = () => {
           title: '',
         }}
       />
-      {/* <Stack.Screen
-        name="Products"
-        component={ProductsScreen}
-        options={{
-          headerBackTitleVisible: false,
-          title: '',
-        }}
-      /> */}
     </Stack.Navigator>
   );
 };
 
 export type AuthStackParamList = {
-  Welcome: undefined;
   Login: undefined;
-  Register: undefined;
-  RegisterAbout: undefined;
-  UaePass: undefined;
-  Link: undefined;
 };
 
 export type AuthScreenNavigationProp<T extends keyof AuthStackParamList> =

@@ -2,12 +2,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/core';
 
 export type AppStackParamList = {
-  HomeTabs: any;
-  Home: undefined;
-  Track: undefined;
-  Send: undefined;
-  Shipment: {filteredDates: {from: string; to: string}} | undefined;
- 
+  Home: any;
 };
 
 export type ScreenNavigationProp<T extends keyof AppStackParamList> =

@@ -9,15 +9,19 @@
  */
 
 import React from 'react';
+import {Text, View} from 'react-native';
 import AuthNavigation from './navigation/authNavigation';
 import {Provider as ReduxProvider} from 'react-redux';
 import {store} from './store';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { RootNavigation } from './navigation/rootNavigation';
 
 const App = () => {
   return (
     <ReduxProvider store={store}>
-      <AuthNavigation />
+      <RootNavigation/>
     </ReduxProvider>
+      
   );
 };
 

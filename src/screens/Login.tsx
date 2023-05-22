@@ -19,13 +19,7 @@ const LoginScreen: React.FC<AuthProps<'Login'>> = ({navigation}) => {
   return (
     <>
       <View>
-        <Text>asdasd LOGIN SCREEN</Text>
-        <Text>asdasd LOGIN SCREEN</Text>
-        <Text>asdasd LOGIN SCREEN</Text>
-        <Text>asdasd LOGIN SCREEN</Text>
-        <Text>asdasd LOGIN SCREEN</Text>
-        <Text>asdasd LOGIN SCREEN</Text>
-        <Text>asdasd LOGIN SCREEN</Text>
+        <Text>LOGIN SCREEN</Text>
       </View>
     </>
   );
