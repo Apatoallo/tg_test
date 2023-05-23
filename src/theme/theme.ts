@@ -14,6 +14,7 @@ export interface ColorTheme {
 }
 
 export interface SpacingTheme {
+  marginMicroSmall: number;
   paddingMicroSmall: number;
   marginExtraSmall: number;
   paddingExtraSmall: number;
@@ -77,6 +78,7 @@ const darkColorTheme: ColorTheme = {
 };
 
 const defaultSpacingTheme: SpacingTheme = {
+  marginMicroSmall: 2,
   paddingMicroSmall: 2,
   marginExtraSmall: 4,
   paddingExtraSmall: 4,
@@ -94,12 +96,12 @@ const defaultSpacingTheme: SpacingTheme = {
   padding: 16,
   marginMLarge: 18,
   paddingLLarge: 20,
-  marginLLarge: 20,
-  paddingMLarge: 18,
-  marginLarge: 24,
-  paddingLarge: 24,
-  marginXLarge: 32,
-  paddingXLarge: 32,
+  marginLLarge: 28,
+  paddingMLarge: 28,
+  marginLarge: 32,
+  paddingLarge: 32,
+  marginXLarge: 38,
+  paddingXLarge: 38,
   marginExtraLarge: 48,
   paddingExtraLarge: 48,
   marginXXL: 78,

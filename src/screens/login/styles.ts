@@ -21,7 +21,7 @@ const createStyles = (theme: Theme) => {
       alignItems: 'center'
     },
     inputContainer: {
-      paddingTop: theme.spacing.paddingLLarge,
+      paddingTop: theme.spacing.paddingXLarge,
     },
     userName: {
       height: 50,
@@ -39,17 +39,25 @@ const createStyles = (theme: Theme) => {
       paddingLeft: theme.spacing.paddingMLarge,
       paddingRight: theme.spacing.paddingMLarge
     },
+    valdTxt: {
+      fontSize: 11, 
+      color: '#999'
+    },
+    valdErrs: {
+      padding: 8,
+      position: 'absolute', 
+      bottom: -theme.spacing.paddingMLarge
+    },
     loginBtnContainer: {
       justifyContent: 'flex-end',
-      alignItems: 'center',
       height: 300,
+      width: '100%',
     },
     loginBtn: {
       height: 50,
       backgroundColor: theme.color.backgroundPrimary,
       justifyContent: 'center',
       alignItems: 'center',
-      width: '100%',
       borderRadius: 30
     },
     loginTitle: {
