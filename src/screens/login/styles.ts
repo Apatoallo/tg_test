@@ -26,6 +26,7 @@ const createStyles = (theme: Theme) => {
     userName: {
       height: 50,
       borderColor: theme.color.backgroundPrimary,
+      backgroundColor: theme.color.white,
       borderWidth: 2,
       borderRadius: 30,
       paddingLeft: theme.spacing.paddingMLarge,
@@ -34,6 +35,7 @@ const createStyles = (theme: Theme) => {
     password: {
       height: 50,
       borderColor: theme.color.backgroundPrimary,
+      backgroundColor: theme.color.white,
       borderWidth: 2,
       borderRadius: 30,
       paddingLeft: theme.spacing.paddingMLarge,
@@ -41,21 +43,26 @@ const createStyles = (theme: Theme) => {
     },
     valdTxt: {
       fontSize: 11, 
-      color: '#999'
+      color: '#fff'
     },
     valdErrs: {
       padding: 8,
       position: 'absolute', 
-      bottom: -theme.spacing.paddingMLarge
+      bottom: -theme.spacing.paddingMLarge,
+    },
+    errs: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: 30
     },
     loginBtnContainer: {
       justifyContent: 'flex-end',
-      height: 300,
+      height: 265,
       width: '100%',
     },
     loginBtn: {
       height: 50,
-      backgroundColor: theme.color.backgroundPrimary,
+      backgroundColor: theme.color.backgroundPrimaryA200,
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 30

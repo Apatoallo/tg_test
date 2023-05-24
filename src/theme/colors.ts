@@ -7,7 +7,9 @@ export const blue = {
 };
 
 export const red = {
-  a100: 'rgb( 184, 58, 63 )',
+  a100: '#E91D34',
+  a200: 'rgb(180,21,40)',
+  a300: 'rgba(180,21,40,0.7)',
 };
 
 export const yellow = {

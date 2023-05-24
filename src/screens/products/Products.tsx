@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import createStyles from './styles';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
@@ -7,7 +7,7 @@ import { logOut } from '../../store/slices/authSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme, useThemedStyle } from '../../theme';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import { productList } from '../../store/slices/productsSlice'
+import { productList, addToBasket, clearBasket, addProduct } from '../../store/slices/productsSlice'
 
 interface Props {
   navigation: 'Products';
@@ -18,6 +18,8 @@ const ProductsScreen = (props: Props) => {
   const dispatch = useAppDispatch();
   const products = useAppSelector( productList );
   const [data]  = useState(products?.products)
+  const [quantity, setQuantity]  = useState([])
+
   const [filteredData, setFilteredData]  = useState(products?.products)
   const styles = useThemedStyle(createStyles);
   
@@ -31,6 +33,10 @@ const ProductsScreen = (props: Props) => {
       console.log(err)
     })
   }  
+  useEffect(() => {
+    const productQuantity = products?.products.reduce((a, c) => { return a + c.quantity}, 0)
+    setQuantity(productQuantity)
+  },[products])
 
   const searchFilteredData = (text: string) => {
 
@@ -49,14 +55,30 @@ const ProductsScreen = (props: Props) => {
     }
   }
 
+  const basket = (item: Object) => {
+    console.log(products.basket, 'isINCLUDE')
+    if (item !== null) {
+      dispatch(addToBasket(item))
+    }
+    
+  }
+  const clearBsket = () => {
+   dispatch(clearBasket())
+ }
+
   return (
     <>
-      <View>
-        <View style={{paddingTop: 50, height: 180, backgroundColor: '#fff', justifyContent: 'space-between', paddingBottom: 30 }}>
-          <View style={{flexDirection: 'row',paddingLeft: 15, paddingRight: 15, alignItems: 'center', justifyContent: 'space-between'}}>
-            <TouchableOpacity onPress={() => logout()}><Text>çıkış</Text></TouchableOpacity>
+      <View >
+        <View style={styles.productsContainer}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => logout()}>
+              <Text>Çıkış Yap</Text>
+            </TouchableOpacity>
             <Text>Ürünler</Text>
-            <TouchableOpacity><Text>Sepet</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => props.navigation.navigate('Basket')}>
+              <Text>{quantity} Sepet</Text>
+            </TouchableOpacity>
+          
           </View>
           <View style={styles.srchContainer}>
             <TextInput 
@@ -71,16 +93,30 @@ const ProductsScreen = (props: Props) => {
             />
           </View>
         </View>
-        <View style={{ backgroundColor: '#red'}}>
+        <View style={{ backgroundColor: '#fff',height: '100%'}}>
         
           {filteredData?.map((item: any, index: number) => (
-            <View key={index+'products'} style={{height: 50, marginBottom: 2, backgroundColor: theme.color.backgroundPrimary}}>
-              <Text style={{color: '#fff'}}>{item.name}</Text>
-              <Text style={{color: '#fff'}}>{item.interigents}</Text>
+            <View key={index+'products'} style={styles.item}>
+              <View style={styles.productDetails}>
+                <Text style={styles.productName}>{item.name}</Text>
+                <Text style={styles.descTxt}>İçindekiler: {item.interigents}</Text>
+              </View>
+              <View style={styles.addToBasket}>
+                <TouchableOpacity onPress={() => dispatch(addProduct(item))} style={styles.addToBasketBtn}>
+                  <View style={styles.price}>
+                    <Text style={styles.priceTxt}><Text style={styles.currency}>₺</Text>{item.price}<Text style={styles.decimal}>.00 </Text></Text>
+                  </View>
+                  <View style={styles.addtoBasketBtn}>
+                    <Text style={styles.addToBasketTxt}>Sepete Ekle</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+              
             </View>
           ))}
           
         </View>
+        
         
       </View>
     </>

@@ -8,7 +8,8 @@ export interface ColorTheme {
   primary: string;
   backgroundPrimary: string;
   primaryA100: string;
-  backgroundPrimaryA100: string;
+  backgroundPrimaryA200: string;
+  backgroundPrimaryA300: string;
   backgroundPrimaryVariantA100: string;
   primaryA200: string;
 }
@@ -60,7 +61,8 @@ const lightColorTheme: ColorTheme = {
   white: colors.white,
   backgroundPrimary: colors.red.a100,
   primaryA100: colors.blue.a100,
-  backgroundPrimaryA100: colors.blue.a100,
+  backgroundPrimaryA200: colors.red.a200,
+  backgroundPrimaryA300: colors.red.a300,
   backgroundPrimaryVariantA100: colors.blue.a100,
   primaryA200: colors.blue.a100,
   
@@ -71,7 +73,8 @@ const darkColorTheme: ColorTheme = {
   white: colors.white,
   backgroundPrimary: colors.red.a100,
   primaryA100: colors.blue.a100,
-  backgroundPrimaryA100: colors.blue.a100,
+  backgroundPrimaryA200: colors.red.a200,
+  backgroundPrimaryA300: colors.red.a300,
   backgroundPrimaryVariantA100: colors.blue.a100,
   primaryA200: colors.blue.a100,
   

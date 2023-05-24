@@ -101,7 +101,7 @@ const LoginScreen: React.FC<AuthProps<'Login'>> = ({navigation}) => {
         <View style={styles.loginHeader}>
           <Text style={styles.titleTxt}>Tıkla Gelsin</Text>
         </View>
-        <View style={styles.root}>
+        <View style={[styles.root, {backgroundColor: '#e91d34'}]}>
           <View style={styles.inputContainer}>
             <TextInput 
               placeholder='Username' 
@@ -132,16 +132,19 @@ const LoginScreen: React.FC<AuthProps<'Login'>> = ({navigation}) => {
               <Text style={styles.valdTxt}>{passErr}</Text>
             </View>
           </View>
-         
+          <View style={styles.errs}>
+              <Text style={styles.valdTxt}>{log}</Text>
+            </View>
           <View style={styles.loginBtnContainer}>
-
+            
             <TouchableOpacity onPress={() => login(email, password)}>
               <View style={[styles.loginBtn, {opacity: isBtnActive}]}>
-                <Text style={styles.loginTitle}>Giriş Yap {log}</Text>
+                <Text style={styles.loginTitle}>Giriş Yap</Text>
               </View>
             </TouchableOpacity>
             
           </View>
+          
       </View>
       </>
   );

@@ -5,6 +5,7 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 import ProductsScreen from '../screens/products/Products';
+import BasketScreen from '../screens/basket/Basket';
 import { useTheme } from '../theme';
 
 const Stack = createStackNavigator<AppStackParamList>();
@@ -33,6 +34,15 @@ const AppNavigation = (storedCredentials:any) => {
               // title: '',
             }}
           />
+          <Stack.Screen
+            name="Basket"
+            component={BasketScreen}
+            options={{
+              // headerBackTitleVisible: false,
+              headerShown: false,
+              // title: '',
+            }}
+          />
           
      
     </Stack.Navigator>
@@ -43,6 +53,7 @@ const AppNavigation = (storedCredentials:any) => {
 
 export type AppStackParamList = {
   Home: any;
+  Basket: any;
 };
 
 

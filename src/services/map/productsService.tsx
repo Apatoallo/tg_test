@@ -1,5 +1,5 @@
 import apiConfig from '../../config/api';
-import {RatesRequest, RatesResponse} from '../../models/entities/rates';
+import {RatesRequest, RatesResponse} from '../../models/entities/auth';
 import {productsClient} from './productsClient';
 
 export interface IRatesService {

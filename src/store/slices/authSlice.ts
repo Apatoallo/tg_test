@@ -1,7 +1,7 @@
 import {
   LogOut,
   LoggedIn
-} from '../../models/entities/rates/index';
+} from '../../models/entities/auth/index';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from '../index';
 
