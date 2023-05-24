@@ -30,9 +30,7 @@ export const authSlice = createSlice({
       state.isLoggedin = true
     }
   },
-  extraReducers: builder => {
-    
-  },
+  extraReducers: builder => {},
 });
 
 export const { logOut, logIn } = authSlice.actions;

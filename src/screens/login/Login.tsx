@@ -13,7 +13,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   authentication
 } from '../../store/slices/authSlice';
-import { CredentialsContext } from '../../components/credentialContext';
 
 const LoginScreen: React.FC<AuthProps<'Login'>> = ({navigation}) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
