@@ -1,36 +1,36 @@
 /* eslint-disable prettier/prettier */
-import React, {useEffect, useLayoutEffect, useState} from 'react';
-import {View, SafeAreaView, Text, TextInput, Button, Alert} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput } from 'react-native';
 import {AuthProps} from '../../navigation';
-import {useAppDispatch} from '../../store/hooks';
 import createStyles from './styles';
-import { useTheme, useThemedStyle } from '../../theme';
+import { useThemedStyle } from '../../theme';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { logIn } from '../../store/slices/authSlice';
+// Async Storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// import {logIn} from '../store/slices/user';
+import {
+  authentication
+} from '../../store/slices/authSlice';
+import { CredentialsContext } from '../../components/credentialContext';
 
 const LoginScreen: React.FC<AuthProps<'Login'>> = ({navigation}) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [reg] = useState<RegExp>(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/)
-  
-  const [passErr, setPasswordErr] = useState<string>('');
-  const [credentials, setCredentials] = useState<Boolean>(false);
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState<string>('');
+  const [errMsg, setloginErr] = useState<string>('');
+  const [reg] = useState<RegExp>(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/)
+  const [passErr, setPasswordErr] = useState<string>('');
+  const [credentials, setCredentials] = useState<Boolean>(false);  
   const [log, isLogin] = useState('');
   const [emailValidError, setEmailValidError] = useState('');
-  
   const [isBtnActive, setisBtnActive] = useState(0.3);
-  const dispatch = useAppDispatch();
-  const styles = useThemedStyle(createStyles);
-  const { theme } = useTheme();
 
-  const handlePassword = () => {
-    if (password.length <= 7) {
-      setPasswordErr('')
-    }
-  }
+  const dispatch = useAppDispatch();
+  const auth = useAppSelector(authentication);
+
+  const styles = useThemedStyle(createStyles);
 
   useEffect(() => {
     if(password.length < 7) {
@@ -63,23 +63,38 @@ const LoginScreen: React.FC<AuthProps<'Login'>> = ({navigation}) => {
     }
   };
 
-  useEffect(() => {
-    if((reg.test(email) && password.length >= 7)) {
-      setCredentials(true)
-      setisBtnActive(1)
-    } else {
-      setCredentials(false)
-      setisBtnActive(0.3)
-      
-    }
-  }, [email, password]);
-
-  const login = () => {
+  const login = (email: string, password: string) => {
     if(credentials) {
 
-    
+      const objectsEqual = (o1:{}, o2:{}) =>Object.keys(o1).length === Object.keys(o2).length && Object.keys(o1).every((p: any) => o1[p] === o2[p]);
+      
+      const data = {
+        email: email,
+        password: password,
+      }
+      
+      if( objectsEqual(auth.loginUser, data) ) {
+        persistLogin( data, 'success', '200' )
+      }else {
+        isLogin('Failed to login')
+      }
     }
-    
+  }
+
+  const handleMsg = (errMsg: string, _status: string | null) => {
+    setloginErr(errMsg)
+  }
+  
+  const persistLogin = (credentials: any, msg: string, status: string) => {
+    AsyncStorage.setItem('isLoggedin', msg)
+    .then(() => {
+      handleMsg( msg, status)
+      dispatch(logIn({isLoggedIn: true}))
+    })
+    .catch((error)=> {
+      console.log(error);
+      handleMsg('Persisting login failed', null);
+    })
   }
     
   return (
@@ -119,13 +134,11 @@ const LoginScreen: React.FC<AuthProps<'Login'>> = ({navigation}) => {
             </View>
           </View>
          
-          
-          
           <View style={styles.loginBtnContainer}>
 
-            <TouchableOpacity onPress={() => login()}>
+            <TouchableOpacity onPress={() => login(email, password)}>
               <View style={[styles.loginBtn, {opacity: isBtnActive}]}>
-                <Text style={styles.loginTitle}>Giriş Yap</Text>
+                <Text style={styles.loginTitle}>Giriş Yap {log}</Text>
               </View>
             </TouchableOpacity>
             

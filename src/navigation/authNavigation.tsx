@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   createStackNavigator,
   StackNavigationProp,
@@ -6,13 +6,11 @@ import {
 import {useTheme} from '../theme';
 import {RouteProp} from '@react-navigation/core';
 import LoginScreen from '../screens/login/Login';
-// import ProductsScreen from '../screens/Products';
-
-
 const Stack = createStackNavigator<AuthStackParamList>();
 
 const AuthNavigation = () => {
   const {theme} = useTheme();
+  
   return (
     <Stack.Navigator
       initialRouteName="Login"
@@ -20,23 +18,22 @@ const AuthNavigation = () => {
         headerTitleStyle: {
           fontFamily: theme.font.default,
         },
-        // headerBackImage: () => <HeaderBack />,
       }}>
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        options={{
-          // headerBackTitleVisible: false,
-          headerShown: false,
-          // title: '',
-        }}
-      />
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
     </Stack.Navigator>
   );
 };
 
 export type AuthStackParamList = {
   Login: undefined;
+  Products: undefined;
+  Home: undefined;
 };
 
 export type AuthScreenNavigationProp<T extends keyof AuthStackParamList> =
@@ -51,5 +48,7 @@ export type AuthProps<T extends keyof AuthStackParamList> = {
   route: ScreenRouteProp<T>;
   navigation: AuthScreenNavigationProp<T>;
 };
+
+
 
 export default AuthNavigation;

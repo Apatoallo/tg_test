@@ -1,19 +1,49 @@
-import {StackNavigationProp} from '@react-navigation/stack';
+import React, {useState} from 'react'
 import {RouteProp} from '@react-navigation/core';
+import {
+  createStackNavigator,
+  StackNavigationProp,
+} from '@react-navigation/stack';
+import ProductsScreen from '../screens/products/Products';
+import { useTheme } from '../theme';
+
+const Stack = createStackNavigator<AppStackParamList>();
+
+
+const AppNavigation = (storedCredentials:any) => {
+  const [isLoggedin, setisLoggedin] = useState<any>();
+  
+  const { theme } = useTheme();
+  
+  return (
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerTitleStyle: {
+          fontFamily: theme.font.default,
+        },
+        // headerBackImage: () => <HeaderBack />,
+      }}>
+          <Stack.Screen
+            name="Home"
+            component={ProductsScreen}
+            options={{
+              // headerBackTitleVisible: false,
+              headerShown: false,
+              // title: '',
+            }}
+          />
+          
+     
+    </Stack.Navigator>
+  );
+};
+
+
 
 export type AppStackParamList = {
   Home: any;
 };
 
-export type ScreenNavigationProp<T extends keyof AppStackParamList> =
-  StackNavigationProp<AppStackParamList, T>;
 
-export type ScreenRouteProp<T extends keyof AppStackParamList> = RouteProp<
-  AppStackParamList,
-  T
->;
-
-export type AppProps<T extends keyof AppStackParamList> = {
-  route: ScreenRouteProp<T>;
-  navigation: ScreenNavigationProp<T>;
-};
+export default AppNavigation;

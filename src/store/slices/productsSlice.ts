@@ -1,33 +1,57 @@
 import {
-  RatesResponse,
   PricingOption,
 } from './../../models/entities/rates/index';
-import {postCalculation} from './../thunks/productsThunk';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {RootState} from '../index';
-import {ProblemDetails} from '../../models/entities/api';
 
 type SliceState = {
-  ratesLoading: boolean;
-  ratesError: ProblemDetails | undefined;
-  ratesData: RatesResponse | null;
-  selectedServiceForRates: PricingOption | null;
-  productsCount: String;
+  products: Object[];
+  basket: Object[];
+  productsCount: Number;
 };
 
 const initialState: SliceState = {
-  ratesLoading: false,
-  ratesError: undefined,
-  ratesData: null,
-  selectedServiceForRates: null,
-  productsCount: '123123SEMSEM SEM',
+  products: [
+    {
+      name: 'Menu 1',
+      price: '119.00',
+      interigents: 'Parmesan, Domates, Mantar, Jalapeno'
+    },
+    {
+      name: 'Menu 2',
+      price: '189.00',
+      interigents: 'Mozarella, Domates, Özel Sos'
+    },
+    {
+      name: 'Menu 3',
+      price: '230.00',
+      interigents: 'Soğan, Domates, Biber, Cheddar'
+    },
+    {
+      name: 'Menu 4',
+      price: '90.00',
+      interigents: 'Salatalık, Domates, Özel Sos, Mantar'
+    },
+    {
+      name: 'Menu 5',
+      price: '150.00',
+      interigents: 'Sosis, Domates, Salam'
+    },
+    {
+      name: 'Menu 6',
+      price: '120.00',
+      interigents: 'Soğan, Domates, Özel Sos'
+    },
+],
+  productsCount: 0,
+  basket: [],
 };
 
 export const productsSlice = createSlice({
-  name: 'products',
+  name: 'productList',
   initialState: initialState,
   reducers: {
-    clearRates: () => {
+    clearBasket: () => {
       return initialState;
     },
     setSelectedServiceForRates: (
@@ -40,30 +64,9 @@ export const productsSlice = createSlice({
       };
     },
   },
-  extraReducers: builder => {
-    builder.addCase(postCalculation.pending, state => {
-      state.ratesData = null;
-      state.ratesLoading = true;
-      state.ratesError = undefined;
-    });
-    builder.addCase(postCalculation.fulfilled, (state, action) => {
-      state.ratesLoading = false;
-      state.ratesData = {
-        pricingOptions: action.payload.pricingOptions.filter(item =>
-          action.meta.arg.requestBody.shipmentType === 'Document'
-            ? item.contentTypeCodeEn === 'Document'
-            : item.contentTypeCodeEn === 'NonDocument',
-        ),
-      };
-    });
-    builder.addCase(postCalculation.rejected, (state, action) => {
-      state.ratesLoading = false;
-      state.ratesError = action.payload;
-      state.ratesData = null;
-    });
-  },
+  extraReducers: builder => {},
 });
 
-export const {clearRates, setSelectedServiceForRates} = productsSlice.actions;
-export const productsCounter = (state: RootState) => state.products;
+export const {clearBasket} = productsSlice.actions;
+export const productList = (state: RootState) => state.products;
 export default productsSlice.reducer;

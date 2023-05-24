@@ -7,10 +7,8 @@ const initialState = {
   loading: false,
   error: '',
   done: false,
-  creditCards: [
-    { cardNumber: '4012888888881881', cardNickName: 'My Visa Card' },
-    { cardNumber: '2222405343248877', cardNickName: 'my second card' },
-  ] as CreditCard[],
+  
+  
 };
 
 const usersServiceSlice = createSlice({
@@ -19,9 +17,6 @@ const usersServiceSlice = createSlice({
   reducers: {
     resetUserService: () => {
       return initialState;
-    },
-    addCreditCard: (state, action: PayloadAction<CreditCard>) => {
-      state.creditCards.push(action.payload);
     },
   },
   extraReducers: builder => {
@@ -41,8 +36,8 @@ const usersServiceSlice = createSlice({
   },
 });
 
-export const { resetUserService, addCreditCard } = usersServiceSlice.actions;
-export const selectUserService = (state: RootState) => state.userService;
+export const { resetUserService } = usersServiceSlice.actions;
+export const selectUserService = (state: RootState) => state.products;
 export default usersServiceSlice.reducer;
 
 export const selectCreditCards = createSelector(
